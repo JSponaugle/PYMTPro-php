@@ -17,17 +17,20 @@ Get API Token and Secret From PYMTPro  https://pymtpro.com/panel/api
 ```
 require_once(__DIR__.'/pymtpro.php');
 
-$apiToken = '{GeneratedTokebn}';
+$apiToken = '{GeneratedToken}';
 $apiSecret = '{GeneratedSecret}';
 
 $params = array(
-      'name'               => 'Order Name', // Order Name
-      'price_string'       => '5.00', // Price in USD if price_currency_iso is set to USD
-      'price_currency_iso' => 'USD', // Currency USD, XPY
-      'callback_url'       => 'http://website.com/pymtpro/pymtpro_ipn.php', // PYMTPro IPN
-      'custom'             => 'Custom Name',
-      'success_url'        => 'http://website.com/ordersuccess.php', // Url to send user once order has been processed
-      'cancel_url'         => 'http://website.com/ordercancel.php',  // Url to send user if user cancels order
+	'coin'               => 'ion', //CryptoType ion, btc
+	'name'               => 'Order Name', // Order Name
+	'description'        => 'Order Description', // Order Description
+	'style'              => 'PYMTPro', // Order Name
+	'price_string'       => '5.00', // Price in USD if price_currency_iso is set to USD
+	'price_currency_iso' => 'USD', // Currency USD, ION, BTC
+	'callback_url'       => 'http://website.com/pymtpro/pymtpro_ipn.php', // PYMTPro IPN
+	'custom'             => 'Custom Name',
+	'success_url'        => 'http://website.com/ordersuccess.php', // Url to send user once order has been processed
+	'cancel_url'         => 'http://website.com/ordercancel.php',  // Url to send user if user cancels order
 );
  
 $buyurl = 'https://pymtpro.com/order/';
@@ -37,7 +40,8 @@ $code = $Gateway->createButtonWithOptions($params)->button->code;
 echo $buyurl.$code;
 ```
   
-###CallBack URL
+Call BackUrl
+-------
   
 ```
 $post_body = json_decode(file_get_contents("php://input"));
