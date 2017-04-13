@@ -29,10 +29,10 @@ class PYMTPro_Rpc
             $curlOpts[CURLOPT_HTTPGET] = 1;
             if ($queryString) {
                 $url .= "?" . $queryString . "&" . $codeit;
-            }
+            } else {
+				$url .= "?" . $codeit;
+			}
         } else if ($method == 'post') {
-			$headers[] = "Content-Type: application/json";
-			$headers[] = 'Content-Length: ' . strlen($params);
             $curlOpts[CURLOPT_POST] = 1;
 			$url .= "?" . $codeit;
             $curlOpts[CURLOPT_POSTFIELDS] = json_encode($params);
@@ -40,10 +40,10 @@ class PYMTPro_Rpc
             $curlOpts[CURLOPT_CUSTOMREQUEST] = "DELETE";
             if ($queryString) {
                 $url .= "?" . $queryString . "&" . $codeit;
-            }
+            } else {
+				$url .= "?" . $codeit;
+			}
         } else if ($method == 'put') {
-			$headers[] = "Content-Type: application/json";
-			$headers[] = 'Content-Length: ' . strlen($params);
 			$url .= "?" . $codeit;
             $curlOpts[CURLOPT_CUSTOMREQUEST] = "PUT";
             $curlOpts[CURLOPT_POSTFIELDS] = json_encode($params);
@@ -51,6 +51,9 @@ class PYMTPro_Rpc
 
         // Headers
         $headers = array('User-Agent: PYMTPro/v2');
+		$headers[] = "Content-Type: application/json";
+		$headers[] = 'Content-Length: ' . strlen($params);
+		$headers[] = "Accept: application/json";
 
         // Get the authentication class and parse its payload into the HTTP header.
         $authenticationClass = get_class($this->_authentication);
