@@ -39,7 +39,8 @@ $code = $Gateway->createButtonWithOptions($params)->button->code;
 
 echo $buyurl.$code;
 ```
-  
+URL returned is what you want to display in a iframe or something for the enduser.
+
 Call BackUrl
 -------
   
